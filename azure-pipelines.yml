@@ -24,14 +24,14 @@ steps:
 - task: gulp@1
   displayName: 'Run gulp tasks'
 
-- script: 'echo "$(Build.DefintionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
+- script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
   displayName: 'Write build info'
   workingDirectory: Tailspin.SpaceGame.Web/wwwroot
 
 - task: DotNetCoreCLI@2
-  displayName: 'Restore project dependancies'
+  displayName: 'Restore project dependencies'
   inputs:
-    comamnd: 'restore'
+    command: 'restore'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
@@ -47,9 +47,9 @@ steps:
     command: 'publish'
     projects: '**/*.csproj'
     publishWebProjects: false
-    arguments: '--no-build --configuration Release --output $(Build.ArtificateStagingDirectory)/Release'
+    arguments: '--no-build --configuration Release --output $(Build.ArtifactStagingDirectory)/Release'
     zipAfterPublish: true
 
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish Artsifcat: drop'
+  displayName: 'Publish Artifact: drop'
   condition: succeeded()
